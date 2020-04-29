@@ -82,12 +82,13 @@ public class MyClass {
 		boolean itemIsAddedToCart = canAddItemToCart(driver, wait);
 		boolean itemCanBeRemovedFromCart = itemCanBeDeleted(driver,wait);
 
+		System.out.println("Test shopping cart");
 		if (itemIsAddedToCart) {
-			System.out.println("Item can be added to cart");
+			System.out.println("Item can be added to cart: Pass");
 		}
 		
 		if(itemCanBeRemovedFromCart){
-			System.out.println("Item can be removed from cart");
+			System.out.println("Item can be removed from cart: Pass");
 		}
 
 	}
