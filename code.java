@@ -33,7 +33,7 @@ public class MyClass {
 		cartNum = cartElement.getText();
 
 		// close Fire fox
-		webDriver.close();
+		//webDriver.close();
 
 		if (cartNum.contentEquals("1")) {
 			return true;
@@ -48,24 +48,26 @@ public class MyClass {
 		// launch Fire fox and direct it to the Base URL
 		webDriver.get(baseUrl);
 
+		/*
 		webDriver.findElement(By.linkText("Login")).click();
 		webDriver.findElement(By.cssSelector("input[type='submit']")).click();
-		WebElement toyElement = webDriver.findElement(By.xpath("//a[@href='itemDetail.php?id=19']"));
-		JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
-		jsExecutor.executeScript("arguments[0].click();", toyElement);
-
-		WebElement addCartElement;
-		addCartElement = webDriverWait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("/html/body/div/div/div/div[1]/div[2]/form/input[4]")));
-		addCartElement.click();
-		// jsExecutor.executeScript("arguments[0].click();", addElement);
-		WebElement cartElement = webDriver.findElement(By.id("cartNum"));
-		
+		*/		
 		//click on the cart link in navbar.
+		webDriver.findElement(By.cssSelector("span[id='cartNum']")).click();
 		
 		//click on the link or <span> to remove item. 
+		webDriver.findElement(By.cssSelector("span[class='delLink']")).click();
 
+		WebElement cartElement = webDriver.findElement(By.id("cartNum"));
 		cartNum = cartElement.getText();
+		
+		// close Fire fox
+		webDriver.close();
+		
+		if (cartNum.contentEquals("0")) {
+			return true;
+		}
+		
 		return false;
 	}
 
@@ -78,9 +80,14 @@ public class MyClass {
 		// WebDriver driver = new ChromeDriver();
 
 		boolean itemIsAddedToCart = canAddItemToCart(driver, wait);
+		boolean itemCanBeRemovedFromCart = itemCanBeDeleted(driver,wait);
 
 		if (itemIsAddedToCart) {
 			System.out.println("Item can be added to cart");
+		}
+		
+		if(itemCanBeRemovedFromCart){
+			System.out.println("Item can be removed from cart");
 		}
 
 	}
